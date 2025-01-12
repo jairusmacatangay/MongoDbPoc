@@ -1,8 +1,10 @@
+using FluentValidation;
 using MongoDbPoc.DataGateway;
 using MongoDbPoc.DataGateway.Interfaces;
 using MongoDbPoc.Models;
 using MongoDbPoc.Services;
 using MongoDbPoc.Services.Interfaces;
+using MongoDbPoc.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.Configure<BookStoreDatabaseSettings>(builder.Configuration.GetS
 // DI
 builder.Services.AddSingleton<IBooksDataGateway, BooksNoSqlDataGateway>();
 builder.Services.AddScoped<IBooksService, BooksService>();
+
+// Validators
+builder.Services.AddScoped<IValidator<Book>, BookValidator>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

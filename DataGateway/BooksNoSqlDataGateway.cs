@@ -55,6 +55,10 @@ namespace MongoDbPoc.DataGateway
             {
                 return await _booksCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
             }
+            catch (FormatException)
+            {
+                throw;
+            }
             catch (Exception e)
             {
                 var ex = new DataGatewayException(e);
