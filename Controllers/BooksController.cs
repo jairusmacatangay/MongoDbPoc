@@ -38,13 +38,23 @@ namespace MongoDbPoc.Controllers
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpPost("{id}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiResponse))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiResponse))]
         public async Task<IActionResult> UpdateAsync(string id, UpdateBookRequest request)
         {
             var result = await _booksService.UpdateAsync(id, request.AsModel());
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ApiResponse))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiResponse))]
+        public async Task<IActionResult> DeleteAsync(string id)
+        {
+            var result = await _booksService.DeleteAsync(id);
             return StatusCode(result.StatusCode, result);
         }
     }
