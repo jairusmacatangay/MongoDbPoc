@@ -363,3 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 CoverageReport/
+
+# Ignore appsettings.json
+appsettings.json
+appsettings.*.json
